@@ -32,15 +32,15 @@ The security of this scheme is fundamentally broken by the **nonce generation me
 ## Attack
 1. **Signature Harvesting**: Collect $\approx 14$ signatures. For each, extract $r_0, r_1, r_2, s$ and calculate the message hash $H(m)$.
 2. **Lattice Construction**: We aim to find the secret $x$ and the small nonces $k_i$. The solution script uses the following lattice construction (where $n=q$, $B=2^{224}$, $ts_i = a_i$, $as_i = b_i$):
-   $$
-   M = \begin{pmatrix}
-   q & 0 & \cdots & 0 & 0 & 0 \\
-   0 & q & \cdots & 0 & 0 & 0 \\
-   \vdots & \vdots & \ddots & \vdots & \vdots & \vdots \\
-   0 & 0 & \cdots & q & 0 & 0 \\
-   a_1 & a_2 & \cdots & a_n & B/q & 0 \\
-   b_1 & b_2 & \cdots & b_n & 0 & B
-   \end{pmatrix}
-   $$
+```python
+matrix = [
+    [n,  0, ..., 0,   0,   0],
+    [0,  n, ..., 0,   0,   0],
+    ...
+    [ts1, ts2, ..., tsn, B/n, 0],
+    [as1, as2, ..., asn, 0,   B]
+]
+```
 3. **LLL Recovery**: Applying LLL on this basis over $QQ$ recovers a short vector. Specifically, the private key $x$ is retrieved from the second to last column of the reduced basis row that satisfies the bound conditions.
+
 4. **Forgery**: With $x$ recovered, generate a valid signature for the server's verification challenge to obtain the flag.

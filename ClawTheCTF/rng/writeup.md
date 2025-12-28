@@ -30,11 +30,16 @@ The vulnerability is a **lattice-based attack on truncated LCG nonces** used in 
 ## Attack
 1. **Equation Linearization**: Rearrange the combined DSA-LCG equation into the form $\sum \delta_j \cdot C_{i,j} + x D_i \equiv E_i \pmod{q}$, where $C, D, E$ are constants derived from known values.
 2. **Lattice Construction**: The solution uses a Shortest Vector Problem (SVP) formulation. Let $K$ be a large scaling factor. The lattice basis $M$ is constructed from rows:
-   - For each unknown error $\delta_j$ ($j \in \{0, \dots, n-1\}$):
-     $[0, \dots, 1, \dots, 0, \quad c_{0,j} K, \quad c_{1,j} K, \quad \dots, \quad 0]$
-   - For each modular constraint $q \pmod{q}$:
-     $[0, \dots, 0, \quad q K, \quad 0, \quad \dots, \quad 0]$
-   - A constant row for the targets:
-     $[0, \dots, 0, \quad e_0 K, \quad e_1 K, \quad \dots, \quad 1]$
+```python
+# For each unknown error delta_j:
+[0, ..., 1, ..., 0, c_{0,j}*K, c_{1,j}*K, ..., 0]
+
+# For each modular constraint q:
+[0, ..., 0, q*K, 0, ..., 0]
+
+# For the targets/constants:
+[0, ..., 0, e_0*K, e_1*K, ..., 1]
+```
 3. **LLL Solver**: The target vector in the lattice is $(\delta_0, \delta_1, \delta_2, 0, 0, 1)$. Since $\delta_j$ are only 32 bits, this vector is extremely short relative to the lattice volume. LLL finds this short vector, revealing the truncation errors.
+
 4. **Key and Flag Recovery**: Solving for $\delta_i$ allows direct computation of $x$. Derive the AES key: `hashlib.sha256(str(x).encode()).digest()` and decrypt the ciphertext provided in `out.txt`.
