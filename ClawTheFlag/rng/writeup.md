@@ -43,3 +43,8 @@ The vulnerability is a **lattice-based attack on truncated LCG nonces** used in 
 3. **LLL Solver**: The target vector in the lattice is $(\delta_0, \delta_1, \delta_2, 0, 0, 1)$. Since $\delta_j$ are only 32 bits, this vector is extremely short relative to the lattice volume. LLL finds this short vector, revealing the truncation errors.
 
 4. **Key and Flag Recovery**: Solving for $\delta_i$ allows direct computation of $x$. Derive the AES key: `hashlib.sha256(str(x).encode()).digest()` and decrypt the ciphertext provided in `out.txt`.
+
+## References
+- [The Digital Signature Standard is Secure if the LCG is Not Used for Nonces](https://cseweb.ucsd.edu/~mihir/papers/dss-lcg.pdf) (Bellare & Goldwasser, 1996)
+- [Lattice Attacks on Truncated LCGs](https://link.springer.com/chapter/10.1007/3-540-44448-3_7) (Frieze, Kannan, & Lagarias, 1988)
+- [Breaking Pseudo-Random Number Generators based on LCG](https://theory.stanford.edu/~dfreeman/courses/cs259c/reading/knuth.pdf) (Knuth, The Art of Computer Programming)

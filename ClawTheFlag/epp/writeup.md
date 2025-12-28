@@ -21,7 +21,7 @@ The `add` function is a differential addition that relies on the difference betw
 ## Vulnerability
 The core vulnerability lies in the combination of a weak curve field and a low-density subset sum problem.
 
-1. **Quadratic Extension Field Dlog**: The curve parameters over $GF(p)$ are not "safe" in the context of extension fields. Specifically, lifting the curve to $GF(p^2)$ yields a group order that is "smooth" (comprising many small prime factors). This makes the Discrete Logarithm Problem (DLP) solvable via the Pohlig-Hellman algorithm.
+1. **Quadratic Extension Field Dlog**: The curve parameters over $GF(p)$ are not "safe" in the context of [extension fields](https://www.embeddedrelated.com/showarticle/1600.php). Specifically, lifting the curve to $GF(p^2)$ yields a group order that is "smooth" (comprising many small prime factors). This makes the Discrete Logarithm Problem (DLP) solvable via the Pohlig-Hellman algorithm.
 2. **Linear Accumulation Leakage**: Despite the complex differential addition, the mathematical structure simplifies to a linear combination of the primes $S_i$ and the flag bytes. Recovering $S_i$ via Dlog reveals the coefficients of a subset sum problem:
    $$\sum S_i \cdot \text{secret}_i \equiv c \pmod{\text{ord}(G)}$$
 3. **Small Unknowns (Flag Bytes)**: Since each $S_i$ is 128 bits and the unknown `secret_i` is only 8 bits (ASCII), the density $d = n/B$ is extremely low, making it solvable via lattice reduction.
@@ -41,4 +41,11 @@ M = [
 ]
 ```
 Running LLL on the transpose of this matrix finds the short vector $(\epsilon, \text{secret}_0, \text{secret}_1, \dots, \text{secret}_n, R)$ where $\epsilon = \sum S_i \cdot \text{secret}_i - c \equiv 0 \pmod{\text{ord}(G)}$.
+
+
+## References
+- [Solving Low-Density Subset Sums via Lattice Reduction](https://core.ac.uk/download/pdf/82155823.pdf) (Coster et al., 1992)
+- [A Lattice-Based Algorithm for the Subset Sum Problem](https://link.springer.com/article/10.1007/BF01201991) (Lagarias & Odlyzko, 1985)
+- [The Discrete Logarithm Problem in Elliptic Curves over Quadratic Extensions](https://link.springer.com/chapter/10.1007/3-540-44702-4_7) (Galbraith, 2001)
+- [Introduction to Finite Fields: Extension Fields](https://www.embeddedrelated.com/showarticle/1600.php) (EmbeddedRelated)
 

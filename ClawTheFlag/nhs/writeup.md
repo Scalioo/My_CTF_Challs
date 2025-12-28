@@ -18,14 +18,14 @@ $$s \equiv k_0^{-1}(H(m)r_0 + x r_1 r_2) \pmod{q}$$
 where $k_0, k_1, k_2$ are nonces and $r_i$ are their respective points mapped to the scalar field.
 
 ## Vulnerability
-The security of this scheme is fundamentally broken by the **nonce generation method** and the resulting **Hidden Number Problem (HNP)**.
+The security of this scheme is fundamentally broken by the **nonce generation method** and the resulting **[Hidden Number Problem (HNP)](https://eprint.iacr.org/2019/023.pdf)**.
 
 1. **Short Nonce Leakage**: The nonces $k_i$ are generated as `int(hashlib.sha3_224(...).hexdigest(), 16)`. Since SHA3-224 output is exactly 224 bits, and the group order $q$ is a 256-bit prime, every nonce $k_i$ is significantly smaller than $q$ ($k_i < 2^{224}$ while $q \approx 2^{256}$). This means the top 32 bits of every nonce are always zero.
 2. **Linearization of the Signature Equation**: Multiplying the signature equation by $k_0$ and rearranging gives:
    $$s \cdot k_0 \equiv H(m)r_0 + x r_1 r_2 \pmod{q}$$
    Dividing by $s$:
    $$k_0 \equiv s^{-1} H(m) r_0 + x (s^{-1} r_1 r_2) \pmod{q}$$
-3. **Hidden Number Problem (HNP)**: Let $a_i \equiv s^{-1} r_1 r_2 \pmod{q}$ and $b_i \equiv s^{-1} H(m) r_0 \pmod{q}$. The equation becomes:
+3. **[Hidden Number Problem (HNP)](https://eprint.iacr.org/2019/023.pdf)**: Let $a_i \equiv s^{-1} r_1 r_2 \pmod{q}$ and $b_i \equiv s^{-1} H(m) r_0 \pmod{q}$. The equation becomes:
    $$k_i \equiv x a_i + b_i \pmod{q}$$
    Since we know $k_i$ is "short" (bounded by $2^{224}$), this is a textbook HNP.
 
@@ -44,3 +44,8 @@ matrix = [
 3. **LLL Recovery**: Applying LLL on this basis over $QQ$ recovers a short vector. Specifically, the private key $x$ is retrieved from the second to last column of the reduced basis row that satisfies the bound conditions.
 
 4. **Forgery**: With $x$ recovered, generate a valid signature for the server's verification challenge to obtain the flag.
+
+## References
+- [Revisiting the Hidden Number Problem: Optimal Lattice-Based Attacks](https://eprint.iacr.org/2019/023.pdf) (Albrecht et al., 2019)
+- [Lattice Attacks on Digital Signature Schemes](https://www.di.ens.fr/~stern/data/St82.pdf) (Nguyen & Stern, 2001)
+- [Hardness of Computing the Most Significant Bits of Secret Keys in Public Key Cryptosystems](https://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.48.1564&rep=rep1&type=pdf) (Boneh & Venkatesan, 1996)
