@@ -13,7 +13,9 @@ The challenge provides a Montgomery curve over a prime field $GF(p)$. The user i
 1. Generates 128-bit prime scalars $S_i$ for each byte of the secret flag.
 2. Computes points $P_i = S_i \cdot G$ and provides their $x$-coordinates.
 3. Performs a complex point accumulation where $V$ is iteratively updated:
-   $V = \text{add}(V, \text{multiply}(P_i, \text{secret}_i), |S_i \cdot \text{secret}_i - \sum_{j=0}^{i-1} S_j \cdot \text{secret}_j|)$
+```python
+V = add(V, multiply(P_i, secret_i), abs(S_i * secret_i - sum(S_j * secret_j for j in range(i))))
+```
 The `add` function is a differential addition that relies on the difference between points being a scalar multiple of $G$. The goal is to recover the flag bytes from the provided point coordinates.
 
 ## Vulnerability
