@@ -47,5 +47,4 @@ matrix = [
 
 ## References
 - [Revisiting the Hidden Number Problem: Optimal Lattice-Based Attacks](https://eprint.iacr.org/2019/023.pdf) (Albrecht et al., 2019)
-- [Lattice Attacks on Digital Signature Schemes](https://www.di.ens.fr/~stern/data/St82.pdf) (Nguyen & Stern, 2001)
-- [Hardness of Computing the Most Significant Bits of Secret Keys in Public Key Cryptosystems](https://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.48.1564&rep=rep1&type=pdf) (Boneh & Venkatesan, 1996)
+
