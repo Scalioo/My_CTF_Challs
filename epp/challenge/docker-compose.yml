@@ -1,0 +1,6 @@
+version: '3'
+services:
+  EPP:
+    build: .
+    ports:
+      - "13002:1025"
