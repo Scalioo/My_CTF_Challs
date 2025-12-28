@@ -1,0 +1,18 @@
+name: Rng
+author: scalio
+
+difficulty: Hard
+
+description: |-
+  I love rng , who doesn't ? (im lying)
+
+
+#suggest real flag
+flag: Cybears{lil_bit_truncated_lil_bit_signature_and_thats_the_flag}
+
+provide:
+  - ./challenge/src.sage
+  - ./challenge/out.txt
+
+visible: true
+deployed: false

@@ -1,0 +1,29 @@
+name: Not so Harsh
+author: scalio
+
+difficulty: medium
+
+description: |-
+  My new signature scheme extension is so secure that I even hid the flag inside the signature verification process! Can you retrieve it?
+
+  `{{ nc }}`
+
+#suggest real flag
+flag: Cybears{was_meant_to_be_extended_hnp_but_iwas_too_lazy}
+
+provide:
+  - ./challenge/server.py
+
+containers:
+  main:
+    challenge:
+      build: ./challenge
+      ports: [1025]
+
+expose:
+  main:
+    - target: 1025
+      tcp: nsh.ctf.clawtheflag.com
+
+deployed: false
+visible: true
