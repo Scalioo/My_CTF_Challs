@@ -47,4 +47,4 @@ The vulnerability is a **lattice-based attack on truncated LCG nonces** used in 
 ## References
 - [The Digital Signature Standard is Secure if the LCG is Not Used for Nonces](https://cseweb.ucsd.edu/~mihir/papers/dss-lcg.pdf) (Bellare & Goldwasser, 1996)
 - [Lattice Attacks on Truncated LCGs](https://link.springer.com/chapter/10.1007/3-540-44448-3_7) (Frieze, Kannan, & Lagarias, 1988)
-- [Breaking Pseudo-Random Number Generators based on LCG](https://theory.stanford.edu/~dfreeman/courses/cs259c/reading/knuth.pdf) (Knuth, The Art of Computer Programming)
+

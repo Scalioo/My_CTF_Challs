@@ -44,8 +44,5 @@ Running LLL on the transpose of this matrix finds the short vector $(\epsilon, \
 
 
 ## References
-- [Solving Low-Density Subset Sums via Lattice Reduction](https://core.ac.uk/download/pdf/82155823.pdf) (Coster et al., 1992)
-- [A Lattice-Based Algorithm for the Subset Sum Problem](https://link.springer.com/article/10.1007/BF01201991) (Lagarias & Odlyzko, 1985)
-- [The Discrete Logarithm Problem in Elliptic Curves over Quadratic Extensions](https://link.springer.com/chapter/10.1007/3-540-44702-4_7) (Galbraith, 2001)
-- [Introduction to Finite Fields: Extension Fields](https://www.embeddedrelated.com/showarticle/1600.php) (EmbeddedRelated)
+[Lattice Reduction Attack on the Knapsack](https://www.cs.sjsu.edu/faculty/stamp/papers/topics/topic16/Knapsack.pdf)
 
