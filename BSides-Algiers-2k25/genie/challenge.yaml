@@ -1,0 +1,15 @@
+name: "Genie"
+author: "scalio"
+author_link: ""
+
+difficulty: hard
+
+description: |
+  > Why not an isogeny challenge  
+  >
+
+flags:
+  - shellmates{Weil_Pairing_and_Frobenius_u_get_torsion_group_Kernel_Sign}
+
+files:
+  - dist.zip

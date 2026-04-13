@@ -1,0 +1,6 @@
+version: '3'
+services:
+  genie:
+    build: .
+    ports:
+      - "13005:2020"
